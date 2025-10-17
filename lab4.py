@@ -1,4 +1,3 @@
-# new branch
 import hashlib
 import datetime
 import queue
