@@ -30,7 +30,7 @@ class Block:
 
 
 class Blockchain:
-    def __init__(self, difficulty=4):
+    def __init__(self, difficulty):
         self.chain = []
         self.difficulty = difficulty
         self.create_genesis_block()
@@ -69,7 +69,7 @@ class Blockchain:
 
 
 class Node:
-    def __init__(self, node_id, difficulty=4):
+    def __init__(self, node_id, difficulty):
         self.node_id = node_id
         self.blockchain = Blockchain(difficulty)
         self.peers = []
@@ -131,7 +131,7 @@ class Node:
 
         # Проверяем, не был ли уже принят блок от другого узла
         if self.is_mining:
-            print(f"✅ {self.node_id} добыл блок #{new_block.index}: nonce={new_block.nonce}")
+            print(f"✅ {self.node_id} добыл блок #{new_block.index}: nonce={new_block.nonce} hash={new_block.hash}")
 
             # Рассылаем добытый блок
             self.broadcast_block(new_block)
@@ -240,6 +240,5 @@ print("\n5. Пробуем перемайнить блок...")
 start_time = time.time()
 test_bc.chain[1].mine_block(3)
 mining_time = time.time() - start_time
-print(test_bc.chain[1])
 print(f"   Время перемайнинга: {mining_time:.2f} сек")
 print(f"   Цепочка валидна: {test_bc.is_valid()}")
